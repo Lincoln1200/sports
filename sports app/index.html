@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#6200ea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Sports App</title>
+    <!-- App Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icon/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icon/apple-touch-icon.png">
+    <!-- Preload critical assets -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="main.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <!-- Load styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
+    <!-- PWA manifest -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="connection-status"></div>
+    
+    <header>
+        <div class="container">
+            <h1>Sports App</h1>
+            <nav class="sports-filter">
+                <button class="filter-btn active" data-sport="all">
+                    <i class="fas fa-globe"></i> All
+                </button>
+                <button class="filter-btn" data-sport="Soccer">
+                    <i class="fas fa-futbol"></i> Soccer
+                </button>
+                <button class="filter-btn" data-sport="Basketball">
+                    <i class="fas fa-basketball-ball"></i> NBA
+                </button>
+                <button class="filter-btn" data-sport="Baseball">
+                    <i class="fas fa-baseball-ball"></i> MLB
+                </button>
+                <button class="filter-btn" data-sport="Ice Hockey">
+                    <i class="fas fa-hockey-puck"></i> NHL
+                </button>
+                <button class="filter-btn" data-sport="American Football">
+                    <i class="fas fa-football-ball"></i> NFL
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="matches-grid" id="matches-container">
+            <!-- Loading state -->
+            <div id="loading-state" class="loading-state">
+                <div class="loader"></div>
+                <p>Loading matches...</p>
+            </div>
+
+            <!-- No matches state -->
+            <div id="no-matches" class="no-matches" style="display: none;">
+                No matches available at the moment
+            </div>
+        </div>
+    </main>
+
+    <!-- Template for match cards -->
+    <template id="match-template">
+        <article class="match-card">
+            <header class="match-header">
+                <span class="league"></span>
+                <span class="sport-icon"></span>
+            </header>
+            <div class="match-content">
+                <div class="team home-team">
+                    <img class="team-logo home-logo" alt="" loading="lazy">
+                    <div class="team-name home-name"></div>
+                </div>
+                <div class="score-display">
+                    <div class="scores">
+                        <span class="score home-score"></span>
+                        <span class="score-divider">-</span>
+                        <span class="score away-score"></span>
+                    </div>
+                    <div class="match-info">
+                        <span class="status"></span>
+                        <span class="elapsed"></span>
+                    </div>
+                    <div class="venue"></div>
+                    <div class="datetime"></div>
+                </div>
+                <div class="team away-team">
+                    <img class="team-logo away-logo" alt="" loading="lazy">
+                    <div class="team-name away-name"></div>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <!-- Load Socket.IO and main script -->
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="main.js" defer></script>
+    <script src="capacitor.js" defer></script>
+</body>
+</html>
